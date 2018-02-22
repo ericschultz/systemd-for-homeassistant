@@ -1,0 +1,12 @@
+[Unit]
+Description=Home Assistant Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose -f /opt/homeassistantserver/docker-compose.yml up 
+ExecStop=/usr/local/bin/docker-compose -f /opt/homeassistantserver/docker-compose.yml stop
+
+[Install]
+WantedBy=local.target
