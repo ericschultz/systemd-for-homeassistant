@@ -2,11 +2,15 @@
 Description=Home Assistant Service
 Requires=docker.service
 After=docker.service
+BindsTo=docker.service
 
 [Service]
+WorkingDirectory=/opt/homeassistantserver/
+
 Restart=always
-ExecStart=/usr/bin/docker-compose -f /opt/homeassistantserver/docker-compose.yml up 
-ExecStop=/usr/bin/docker-compose -f /opt/homeassistantserver/docker-compose.yml stop
+ExecStart=/usr/bin/docker-compose -f docker-compose.yml up
+ExecStop=/usr/bin/docker-compose -f docker-compose.yml stop
+Group=docker
 
 [Install]
-WantedBy=local.target
+WantedBy=multi-user.target
